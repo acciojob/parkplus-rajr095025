@@ -1,7 +1,5 @@
 package com.driver.model;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,15 +7,14 @@ import java.util.List;
 
 @Entity
 @Table
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Spot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     int id;
-     int pricePerHour;
+    private int id;
+    private  int pricePerHour;
 
     @Enumerated(value = EnumType.STRING)  //data type of spottype
-     SpotType spotType;
+    private SpotType spotType;
 
     //The name of the table that contains the column. If absent the column is assumed to be in the primary table.
     @Column(columnDefinition = "TINYINT(1)")
