@@ -145,7 +145,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             spot.setSpotType(SpotType.OTHERS);
         }
         spot.setOccupied(false);
-        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
+        //ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         List<Spot> spotList = parkingLot.getSpotList();
 
         spotList.add(spot);
