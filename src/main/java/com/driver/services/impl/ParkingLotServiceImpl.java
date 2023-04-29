@@ -120,6 +120,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         parkingLotRepository1.delete(parkingLot);
     }
     */
+    @Override
     public ParkingLot addParkingLot(String name, String address) {
         ParkingLot parkingLot=new ParkingLot(name,address);
         parkingLotRepository1.save(parkingLot);
@@ -128,13 +129,6 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Override
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
-        ParkingLot parkingLot = null;
-        try{
-            parkingLot = parkingLotRepository1.findById(parkingLotId).get();
-        }
-        catch (Exception e){
-
-        }
         Spot spot = new Spot();
         spot.setPricePerHour(pricePerHour);
         if(numberOfWheels<=2){
@@ -145,7 +139,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             spot.setSpotType(SpotType.OTHERS);
         }
         spot.setOccupied(false);
-        //ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
+        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         List<Spot> spotList = parkingLot.getSpotList();
 
         spotList.add(spot);
