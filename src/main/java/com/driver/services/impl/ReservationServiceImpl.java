@@ -68,10 +68,11 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setNumberOfHours(timeInHours);
 
         user.getReservationList().add(reservation);
-        userRepository3.save(user);
 
         spotAvailable.getReservationList().add(reservation);
-        spotRepository3.save(spotAvailable);
+
+        reservationRepository3.save(reservation);
+        //spotRepository3.save(spotAvailable);
         return reservation;
     }
 }

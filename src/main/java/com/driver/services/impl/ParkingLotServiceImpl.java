@@ -93,8 +93,8 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         }
         catch (Exception e){
-            throw new Exception("paking lot id is not valid");
+            throw new Exception("parking lot id is not valid");
         }
-        parkingLotRepository1.save(parkingLot);
+        parkingLotRepository1.delete(parkingLot);
     }
 }

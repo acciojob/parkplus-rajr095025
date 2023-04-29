@@ -42,7 +42,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
         Payment payment = new Payment();
         mode = mode.toUpperCase();
-        if(PaymentMode.valueOf(mode) != PaymentMode.CARD && PaymentMode.valueOf(mode) != PaymentMode.CASH && PaymentMode.valueOf(mode) != PaymentMode.UPI){
+        if(mode != "CARD" || !mode.equals("CASH") && mode != "UPI"){
             throw new Exception("Payment mode not detected");
         }
         payment.setPaymentMode(PaymentMode.valueOf(mode));
