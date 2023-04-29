@@ -29,6 +29,7 @@ public class PaymentServiceImpl implements PaymentService {
          */
     @Override
     public Payment pay(Integer reservationId, int amountSent, String mode) throws Exception {
+        /*
         Reservation reservation;
         try{
             reservation = reservationRepository2.findById(reservationId).get();
@@ -36,6 +37,9 @@ public class PaymentServiceImpl implements PaymentService {
         catch (Exception e){
             throw new Exception("reservation id is not valid");
         }
+        */
+        Reservation reservation = reservationRepository2.findById(reservationId).get();
+
         int bill = reservation.getSpot().getPricePerHour() * reservation.getNumberOfHours();
         if(amountSent < bill){
             throw new Exception("Insufficient Amount");

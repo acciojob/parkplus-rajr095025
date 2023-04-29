@@ -25,6 +25,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Override
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) throws Exception {
+        /*
         ParkingLot parkingLot;
         try{
             parkingLot = parkingLotRepository1.findById(parkingLotId).get();
@@ -32,6 +33,8 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         catch (Exception e){
             throw new Exception("parking lot id is not valid");
         }
+        */
+        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         Spot spot = new Spot();
         spot.setOccupied(false);
         spot.setPricePerHour(pricePerHour);
@@ -52,6 +55,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Override
     public void deleteSpot(int spotId) throws Exception {
+        /*
         Spot spot;
         try{
             spot = spotRepository1.findById(spotId).get();
@@ -59,11 +63,14 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         catch (Exception e){
             throw new Exception("spot id is not valid");
         }
+        */
+        Spot spot = spotRepository1.findById(spotId).get();
         spotRepository1.delete(spot);
     }
 
     @Override
     public Spot updateSpot(int parkingLotId, int spotId, int pricePerHour) throws Exception {
+        /*
         ParkingLot parkingLot;
         try{
             parkingLot = parkingLotRepository1.findById(parkingLotId).get();
@@ -71,7 +78,9 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         catch (Exception e){
             throw new Exception("parking lot id is not valid");
         }
-
+        */
+        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
+        /*
         Spot spot;
         try{
             spot = spotRepository1.findById(spotId).get();
@@ -79,7 +88,9 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         catch (Exception e){
             throw new Exception("spot id is not valid");
         }
+        */
 
+        Spot spot = spotRepository1.findById(spotId).get();
         spot.setPricePerHour(pricePerHour);
 
         spotRepository1.save(spot);
@@ -88,6 +99,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Override
     public void deleteParkingLot(int parkingLotId) throws Exception {
+        /*
         ParkingLot parkingLot;
         try{
             parkingLot = parkingLotRepository1.findById(parkingLotId).get();
@@ -95,6 +107,8 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         catch (Exception e){
             throw new Exception("parking lot id is not valid");
         }
+        */
+        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         parkingLotRepository1.delete(parkingLot);
     }
 }
