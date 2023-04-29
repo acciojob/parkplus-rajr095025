@@ -128,6 +128,13 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Override
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
+        ParkingLot parkingLot;
+        try{
+            parkingLot = parkingLotRepository1.findById(parkingLotId).get();
+        }
+        catch (Exception e){
+
+        }
         Spot spot = new Spot();
         spot.setPricePerHour(pricePerHour);
         if(numberOfWheels<=2){
