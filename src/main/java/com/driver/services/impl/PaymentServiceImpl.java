@@ -27,17 +27,43 @@ public class PaymentServiceImpl implements PaymentService {
          The system should validate the amount sent by the user and compare it with the bill amount for the reservation
         If the amount sent is less than the bill, the system should throw an exception "Insufficient Amount".
          */
+
     @Override
     public Payment pay(Integer reservationId, int amountSent, String mode) throws Exception {
-        /*
-        Reservation reservation;
-        try{
-            reservation = reservationRepository2.findById(reservationId).get();
+        Payment payment = new Payment();
+        PaymentMode paymentMode;
+
+
+        if(mode.equalsIgnoreCase("cash")){
+            paymentMode=PaymentMode.CASH;
         }
-        catch (Exception e){
-            throw new Exception("reservation id is not valid");
+        else if (mode.equalsIgnoreCase("card")) {
+            paymentMode=PaymentMode.CARD;
         }
-        */
+        else if (mode.equalsIgnoreCase("upi")) {
+            paymentMode=PaymentMode.UPI;
+        }
+        else{
+            throw new Exception("Payment mode not detected");
+        }
+
+        Reservation reservation = reservationRepository2.findById(reservationId).get();
+        reservation.getSpot().setOccupied(false);
+        int totalAmount = reservation.getSpot().getPricePerHour() * reservation.getNumberOfHours();
+        if(totalAmount>amountSent){
+            throw new Exception("Insufficient Amount");
+        }
+        payment.setPaymentMode(paymentMode);
+        payment.setReservation(reservation);
+        payment.setPaymentCompleted(true);
+        reservationRepository2.save(reservation);
+
+        return  payment;
+    }
+    /*
+    @Override
+    public Payment pay(Integer reservationId, int amountSent, String mode) throws Exception {
+
         Reservation reservation = reservationRepository2.findById(reservationId).get();
 
         int bill = reservation.getSpot().getPricePerHour() * reservation.getNumberOfHours();
@@ -56,4 +82,6 @@ public class PaymentServiceImpl implements PaymentService {
         reservationRepository2.save(reservation);
         return payment;
     }
+    */
+
 }

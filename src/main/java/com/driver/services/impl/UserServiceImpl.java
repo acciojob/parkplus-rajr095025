@@ -11,6 +11,27 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository4;
+
+
+    @Override
+    public void deleteUser(Integer userId) {
+        userRepository4.deleteById(userId);
+    }
+
+    @Override
+    public User updatePassword(Integer userId, String password) {
+        User user = userRepository4.findById(userId).get();
+        user.setPassword(password);
+        userRepository4.save(user); //update in db
+        return user;
+    }
+
+    @Override
+    public void register(String name, String phoneNumber, String password) {
+        User user = new User(name,phoneNumber,password);
+        userRepository4.save(user);
+    }
+    /*
     @Override
     public void deleteUser(Integer userId) throws Exception {
         /*
@@ -22,6 +43,7 @@ public class UserServiceImpl implements UserService {
             throw new Exception("user id is not valid");
         }
         */
+    /*
         User user = userRepository4.findById(userId).get();
         userRepository4.delete(user);
     }
@@ -37,6 +59,7 @@ public class UserServiceImpl implements UserService {
             throw new Exception("user id is not valid");
         }
         */
+    /*
         User user = userRepository4.findById(userId).get();
         user.setPassword(password);
         userRepository4.save(user);
@@ -51,4 +74,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         userRepository4.save(user);
     }
+    */
+
 }

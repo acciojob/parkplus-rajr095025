@@ -31,6 +31,9 @@ public class User {
         this.reservationList = reservationList;
     }
 
+    public User(String name, String phoneNumber, String password) {
+    }
+
     public int getId() {
         return id;
     }
