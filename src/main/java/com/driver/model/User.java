@@ -1,38 +1,32 @@
 package com.driver.model;
 
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Table
 @Entity
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
-
     private String phoneNumber;
-
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Reservation> reservationList;
+    private List<Reservation> reservationList = new ArrayList<>();
 
     public User() {
     }
 
-    public User(int id, String name, String phoneNumber, String password, List<Reservation> reservationList) {
-        this.id = id;
+    public User( String name, String phoneNumber, String password) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.reservationList = reservationList;
     }
 
-    public User(String name, String phoneNumber, String password) {
-    }
+    //getter - setter of all obj--------------------------------------------
 
     public int getId() {
         return id;

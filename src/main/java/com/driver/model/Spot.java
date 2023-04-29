@@ -1,40 +1,36 @@
 package com.driver.model;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Spot {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     int id;
+     int pricePerHour;
 
-    @Enumerated(EnumType.STRING)
-    private SpotType spotType;
+    @Enumerated(value = EnumType.STRING)  //data type of spottype
+     SpotType spotType;
 
-    private int pricePerHour;
+    //The name of the table that contains the column. If absent the column is assumed to be in the primary table.
+    @Column(columnDefinition = "TINYINT(1)")
+     boolean occupied;
 
-    private boolean occupied;
 
-    @ManyToOne
+    @ManyToOne  // spot to parking lot relation (child-parent)
     @JoinColumn
     private ParkingLot parkingLot;
-
     @OneToMany(mappedBy = "spot", cascade = CascadeType.ALL)
-    List<Reservation> reservationList;
-
+     List<Reservation> reservationList = new ArrayList<>();
 
     public Spot() {
-    }
-
-    public Spot(int id, SpotType spotType, int pricePerHour, boolean occupied, ParkingLot parkingLot) {
-        this.id = id;
-        this.spotType = spotType;
-        this.pricePerHour = pricePerHour;
-        this.occupied = occupied;
-        this.parkingLot = parkingLot;
     }
 
     public int getId() {
@@ -45,14 +41,6 @@ public class Spot {
         this.id = id;
     }
 
-    public SpotType getSpotType() {
-        return spotType;
-    }
-
-    public void setSpotType(SpotType spotType) {
-        this.spotType = spotType;
-    }
-
     public int getPricePerHour() {
         return pricePerHour;
     }
@@ -61,8 +49,12 @@ public class Spot {
         this.pricePerHour = pricePerHour;
     }
 
-    public boolean isOccupied() {
-        return occupied;
+    public SpotType getSpotType() {
+        return spotType;
+    }
+
+    public void setSpotType(SpotType spotType) {
+        this.spotType = spotType;
     }
 
     public boolean getOccupied() {

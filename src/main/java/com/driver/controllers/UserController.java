@@ -18,13 +18,13 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<User> updatePassword(@RequestParam Integer userId, @RequestParam String password) throws Exception {
-        User updatedUser = userService.updatePassword(userId, password);
+    public ResponseEntity<User> updatePassword(@RequestParam Integer userId, @RequestParam String password){
+        User updatedUser =userService.updatePassword(userId,password);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public void deleteUser(@RequestParam Integer userId) throws Exception {
+    public void deleteUser(@RequestParam Integer userId){
         userService.deleteUser(userId);
     }
 }
