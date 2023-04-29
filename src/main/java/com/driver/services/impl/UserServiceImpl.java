@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository4;
     @Override
     public void deleteUser(Integer userId) throws Exception {
+        /*
         User user;
         try {
             user = userRepository4.findById(userId).get();
@@ -20,11 +21,14 @@ public class UserServiceImpl implements UserService {
         catch (Exception e){
             throw new Exception("user id is not valid");
         }
+        */
+        User user = userRepository4.findById(userId).get();
         userRepository4.delete(user);
     }
 
     @Override
     public User updatePassword(Integer userId, String password) throws Exception {
+        /*
         User user;
         try {
             user = userRepository4.findById(userId).get();
@@ -32,6 +36,8 @@ public class UserServiceImpl implements UserService {
         catch (Exception e){
             throw new Exception("user id is not valid");
         }
+        */
+        User user = userRepository4.findById(userId).get();
         user.setPassword(password);
         userRepository4.save(user);
         return user;
