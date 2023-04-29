@@ -34,6 +34,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             throw new Exception("parking lot id is not valid");
         }
         */
+
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         Spot spot = new Spot();
         spot.setOccupied(false);
